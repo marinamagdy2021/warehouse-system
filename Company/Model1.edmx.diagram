@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db870eb1900144dbb9a157fd27c7f866" Name="Diagram1">
+        <EntityTypeShape EntityType="CompanyMarketModel.Customer" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Export_Quantity" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Import_Quantity" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Item" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Item_Measure" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.item_WareHouse" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Move_To" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Permetion_Export" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Permetion_Import" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.Supplier" Width="1.5" PointX="3.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CompanyMarketModel.WareHouse" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="CompanyMarketModel.FK_CEQE" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SPE" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SPEQ" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SPEQQ" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_WHEQE" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SIQ" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SPIQ" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SPIQQ" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_WHIQ" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_II" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_IM" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_IPII" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_MTA" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SPEE" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_IWH" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_MTB" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_MTC" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_WHPE" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="CompanyMarketModel.FK_WHP" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

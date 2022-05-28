@@ -1,0 +1,1466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CompanyMarketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cus_Email" />
+          </Key>
+          <Property Name="Cus_Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cus_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Cus_Mobile" Type="int" Nullable="false" />
+          <Property Name="Cus_Phone" Type="int" />
+          <Property Name="Cus_Site" Type="varchar" MaxLength="50" />
+          <Property Name="Cus_Fax" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Export_Quantity">
+          <Key>
+            <PropertyRef Name="Per_Num_E" />
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="Out_Quantity" />
+          </Key>
+          <Property Name="Per_Num_E" Type="int" Nullable="false" />
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="Cus_Email" Type="varchar" MaxLength="30" />
+          <Property Name="WH_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Out_Quantity" Type="int" Nullable="false" />
+          <Property Name="Prod_Date" Type="date" />
+          <Property Name="Expi_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Import_Quantity">
+          <Key>
+            <PropertyRef Name="Per_Num_I" />
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="In_Quantity" />
+          </Key>
+          <Property Name="Per_Num_I" Type="int" Nullable="false" />
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="Supp_Email" Type="varchar" MaxLength="30" />
+          <Property Name="WH_Name" Type="varchar" MaxLength="20" />
+          <Property Name="In_Quantity" Type="int" Nullable="false" />
+          <Property Name="Prod_Date" Type="date" />
+          <Property Name="Expi_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="I_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prod_Date" Type="date" />
+          <Property Name="Expi_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Item_Measure">
+          <Key>
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="Measure" />
+          </Key>
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="Measure" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item_WareHouse">
+          <Key>
+            <PropertyRef Name="WH_Name" />
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="WH_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Move_To">
+          <Key>
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="FromWH_Nm" />
+            <PropertyRef Name="ToWH_Nm" />
+            <PropertyRef Name="Move_Date" />
+            <PropertyRef Name="Production_Date" />
+          </Key>
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="FromWH_Nm" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ToWH_Nm" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Move_Date" Type="date" Nullable="false" />
+          <Property Name="Production_Date" Type="date" Nullable="false" />
+          <Property Name="Expire_Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Permetion_Export">
+          <Key>
+            <PropertyRef Name="Per_Num_E" />
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="Per_Num_E" Type="int" Nullable="false" />
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="WH_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Cus_Email" Type="varchar" MaxLength="30" />
+          <Property Name="Per_DateE" Type="date" />
+        </EntityType>
+        <EntityType Name="Permetion_Import">
+          <Key>
+            <PropertyRef Name="Per_Num_I" />
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="Per_Num_I" Type="int" Nullable="false" />
+          <Property Name="I_Code" Type="int" Nullable="false" />
+          <Property Name="Supp_Email" Type="varchar" MaxLength="30" />
+          <Property Name="WH_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Per_Date_I" Type="date" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Supp_Email" />
+          </Key>
+          <Property Name="Supp_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Supp_Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Supp_phone" Type="int" />
+          <Property Name="Supp_Mobile" Type="int" Nullable="false" />
+          <Property Name="Supp_Fax" Type="varchar" MaxLength="30" />
+          <Property Name="Supp_Site" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="WareHouse">
+          <Key>
+            <PropertyRef Name="WH_Name" />
+          </Key>
+          <Property Name="WH_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="WH_Address" Type="varchar" MaxLength="50" />
+          <Property Name="WH_Maneger" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_CEQE">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_Email" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="Cus_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_II">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="item_WareHouse" Type="Self.item_WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="item_WareHouse">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IM">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Measure" Type="Self.Item_Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Item_Measure">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IPII">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Permetion_Import">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IWH">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="item_WareHouse" Type="Self.item_WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="item_WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTA">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Move_To" Type="Self.Move_To" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Move_To">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTB">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="Move_To" Type="Self.Move_To" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Move_To">
+              <PropertyRef Name="FromWH_Nm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTC">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="Move_To" Type="Self.Move_To" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Move_To">
+              <PropertyRef Name="ToWH_Nm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIQ">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supp_Email" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="Supp_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SP">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supp_Email" />
+            </Principal>
+            <Dependent Role="Permetion_Import">
+              <PropertyRef Name="Supp_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPE">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_Email" />
+            </Principal>
+            <Dependent Role="Permetion_Export">
+              <PropertyRef Name="Cus_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPEE">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Permetion_Export">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPEQ">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPEQQ">
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permetion_Export">
+              <PropertyRef Name="Per_Num_E" />
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="Per_Num_E" />
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPIQ">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPIQQ">
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permetion_Import">
+              <PropertyRef Name="Per_Num_I" />
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="Per_Num_I" />
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHEQE">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHIQ">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHP">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Permetion_Import">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHPE">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Permetion_Export">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AboutToExpire" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="period" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AboutToExpire2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="period" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AboutToExpiree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="period" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetWHInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WH_NM" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Movement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A1" Type="date" Mode="In" />
+          <Parameter Name="A2" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ProductInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="I_NM" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProductInfor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="I_NM" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="productsAfterDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="period" Type="int" Mode="In" />
+        </Function>
+        <Function Name="R4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="time_interval_months" Type="int" Mode="In" />
+        </Function>
+        <Function Name="R5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="time_interval_in_Months" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="WHInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="I_code" Type="int" Mode="In" />
+        </Function>
+        <Function Name="zzz" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="period" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="CompanyMarketModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Export_Quantity" EntityType="Self.Export_Quantity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Import_Quantity" EntityType="Self.Import_Quantity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Measure" EntityType="Self.Item_Measure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item_WareHouse" EntityType="Self.item_WareHouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Move_To" EntityType="Self.Move_To" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permetion_Export" EntityType="Self.Permetion_Export" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permetion_Import" EntityType="Self.Permetion_Import" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WareHouse" EntityType="Self.WareHouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CEQE" Association="Self.FK_CEQE">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_II" Association="Self.FK_II">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="item_WareHouse" EntitySet="item_WareHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IM" Association="Self.FK_IM">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item_Measure" EntitySet="Item_Measure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IPII" Association="Self.FK_IPII">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IWH" Association="Self.FK_IWH">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="item_WareHouse" EntitySet="item_WareHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTA" Association="Self.FK_MTA">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Move_To" EntitySet="Move_To" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTB" Association="Self.FK_MTB">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="Move_To" EntitySet="Move_To" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTC" Association="Self.FK_MTC">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="Move_To" EntitySet="Move_To" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIQ" Association="Self.FK_SIQ">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SP" Association="Self.FK_SP">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPE" Association="Self.FK_SPE">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPEE" Association="Self.FK_SPEE">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPEQ" Association="Self.FK_SPEQ">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPEQQ" Association="Self.FK_SPEQQ">
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPIQ" Association="Self.FK_SPIQ">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPIQQ" Association="Self.FK_SPIQQ">
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHEQE" Association="Self.FK_WHEQE">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHIQ" Association="Self.FK_WHIQ">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHP" Association="Self.FK_WHP">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHPE" Association="Self.FK_WHPE">
+            <End Role="WareHouse" EntitySet="WareHouse" />
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CompanyMarketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cus_Email" />
+          </Key>
+          <Property Name="Cus_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cus_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cus_Mobile" Type="Int32" Nullable="false" />
+          <Property Name="Cus_Phone" Type="Int32" />
+          <Property Name="Cus_Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cus_Fax" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Export_Quantity" Relationship="Self.FK_CEQE" FromRole="Customer" ToRole="Export_Quantity" />
+          <NavigationProperty Name="Permetion_Export" Relationship="Self.FK_SPE" FromRole="Customer" ToRole="Permetion_Export" />
+        </EntityType>
+        <EntityType Name="Export_Quantity">
+          <Key>
+            <PropertyRef Name="Per_Num_E" />
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="Out_Quantity" />
+          </Key>
+          <Property Name="Per_Num_E" Type="Int32" Nullable="false" />
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="Cus_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="WH_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Out_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Prod_Date" Type="DateTime" Precision="0" />
+          <Property Name="Expi_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CEQE" FromRole="Export_Quantity" ToRole="Customer" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_SPEQ" FromRole="Export_Quantity" ToRole="Item" />
+          <NavigationProperty Name="Permetion_Export" Relationship="Self.FK_SPEQQ" FromRole="Export_Quantity" ToRole="Permetion_Export" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_WHEQE" FromRole="Export_Quantity" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="Import_Quantity">
+          <Key>
+            <PropertyRef Name="Per_Num_I" />
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="In_Quantity" />
+          </Key>
+          <Property Name="Per_Num_I" Type="Int32" Nullable="false" />
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="Supp_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="WH_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="In_Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Prod_Date" Type="DateTime" Precision="0" />
+          <Property Name="Expi_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_SIQ" FromRole="Import_Quantity" ToRole="Supplier" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_SPIQ" FromRole="Import_Quantity" ToRole="Item" />
+          <NavigationProperty Name="Permetion_Import" Relationship="Self.FK_SPIQQ" FromRole="Import_Quantity" ToRole="Permetion_Import" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_WHIQ" FromRole="Import_Quantity" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="I_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prod_Date" Type="DateTime" Precision="0" />
+          <Property Name="Expi_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Export_Quantity" Relationship="Self.FK_SPEQ" FromRole="Item" ToRole="Export_Quantity" />
+          <NavigationProperty Name="Import_Quantity" Relationship="Self.FK_SPIQ" FromRole="Item" ToRole="Import_Quantity" />
+          <NavigationProperty Name="item_WareHouse" Relationship="Self.FK_II" FromRole="Item" ToRole="item_WareHouse" />
+          <NavigationProperty Name="Item_Measure" Relationship="Self.FK_IM" FromRole="Item" ToRole="Item_Measure" />
+          <NavigationProperty Name="Permetion_Import" Relationship="Self.FK_IPII" FromRole="Item" ToRole="Permetion_Import" />
+          <NavigationProperty Name="Move_To" Relationship="Self.FK_MTA" FromRole="Item" ToRole="Move_To" />
+          <NavigationProperty Name="Permetion_Export" Relationship="Self.FK_SPEE" FromRole="Item" ToRole="Permetion_Export" />
+        </EntityType>
+        <EntityType Name="Item_Measure">
+          <Key>
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="Measure" />
+          </Key>
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="Measure" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_IM" FromRole="Item_Measure" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="item_WareHouse">
+          <Key>
+            <PropertyRef Name="WH_Name" />
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="WH_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_II" FromRole="item_WareHouse" ToRole="Item" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_IWH" FromRole="item_WareHouse" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="Move_To">
+          <Key>
+            <PropertyRef Name="I_Code" />
+            <PropertyRef Name="FromWH_Nm" />
+            <PropertyRef Name="ToWH_Nm" />
+            <PropertyRef Name="Move_Date" />
+            <PropertyRef Name="Production_Date" />
+          </Key>
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="FromWH_Nm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ToWH_Nm" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Move_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Production_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Expire_Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_MTA" FromRole="Move_To" ToRole="Item" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_MTB" FromRole="Move_To" ToRole="WareHouse" />
+          <NavigationProperty Name="WareHouse1" Relationship="Self.FK_MTC" FromRole="Move_To" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="Permetion_Export">
+          <Key>
+            <PropertyRef Name="Per_Num_E" />
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="Per_Num_E" Type="Int32" Nullable="false" />
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="WH_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cus_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Per_DateE" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_SPE" FromRole="Permetion_Export" ToRole="Customer" />
+          <NavigationProperty Name="Export_Quantity" Relationship="Self.FK_SPEQQ" FromRole="Permetion_Export" ToRole="Export_Quantity" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_SPEE" FromRole="Permetion_Export" ToRole="Item" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_WHPE" FromRole="Permetion_Export" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="Permetion_Import">
+          <Key>
+            <PropertyRef Name="Per_Num_I" />
+            <PropertyRef Name="I_Code" />
+          </Key>
+          <Property Name="Per_Num_I" Type="Int32" Nullable="false" />
+          <Property Name="I_Code" Type="Int32" Nullable="false" />
+          <Property Name="Supp_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="WH_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Per_Date_I" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Import_Quantity" Relationship="Self.FK_SPIQQ" FromRole="Permetion_Import" ToRole="Import_Quantity" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_IPII" FromRole="Permetion_Import" ToRole="Item" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_SP" FromRole="Permetion_Import" ToRole="Supplier" />
+          <NavigationProperty Name="WareHouse" Relationship="Self.FK_WHP" FromRole="Permetion_Import" ToRole="WareHouse" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Supp_Email" />
+          </Key>
+          <Property Name="Supp_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supp_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Supp_phone" Type="Int32" />
+          <Property Name="Supp_Mobile" Type="Int32" Nullable="false" />
+          <Property Name="Supp_Fax" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Supp_Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Import_Quantity" Relationship="Self.FK_SIQ" FromRole="Supplier" ToRole="Import_Quantity" />
+          <NavigationProperty Name="Permetion_Import" Relationship="Self.FK_SP" FromRole="Supplier" ToRole="Permetion_Import" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WareHouse">
+          <Key>
+            <PropertyRef Name="WH_Name" />
+          </Key>
+          <Property Name="WH_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WH_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WH_Maneger" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Export_Quantity" Relationship="Self.FK_WHEQE" FromRole="WareHouse" ToRole="Export_Quantity" />
+          <NavigationProperty Name="Import_Quantity" Relationship="Self.FK_WHIQ" FromRole="WareHouse" ToRole="Import_Quantity" />
+          <NavigationProperty Name="item_WareHouse" Relationship="Self.FK_IWH" FromRole="WareHouse" ToRole="item_WareHouse" />
+          <NavigationProperty Name="Move_To" Relationship="Self.FK_MTB" FromRole="WareHouse" ToRole="Move_To" />
+          <NavigationProperty Name="Move_To1" Relationship="Self.FK_MTC" FromRole="WareHouse" ToRole="Move_To" />
+          <NavigationProperty Name="Permetion_Export" Relationship="Self.FK_WHPE" FromRole="WareHouse" ToRole="Permetion_Export" />
+          <NavigationProperty Name="Permetion_Import" Relationship="Self.FK_WHP" FromRole="WareHouse" ToRole="Permetion_Import" />
+        </EntityType>
+        <Association Name="FK_CEQE">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_Email" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="Cus_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPE">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cus_Email" />
+            </Principal>
+            <Dependent Role="Permetion_Export">
+              <PropertyRef Name="Cus_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPEQ">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPEQQ">
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permetion_Export">
+              <PropertyRef Name="Per_Num_E" />
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="Per_Num_E" />
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHEQE">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Export_Quantity" Type="Self.Export_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Export_Quantity">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIQ">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supp_Email" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="Supp_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPIQ">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPIQQ">
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permetion_Import">
+              <PropertyRef Name="Per_Num_I" />
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="Per_Num_I" />
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHIQ">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Import_Quantity" Type="Self.Import_Quantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Import_Quantity">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_II">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="item_WareHouse" Type="Self.item_WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="item_WareHouse">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IM">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Measure" Type="Self.Item_Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Item_Measure">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IPII">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Permetion_Import">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTA">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Move_To" Type="Self.Move_To" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Move_To">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SPEE">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="I_Code" />
+            </Principal>
+            <Dependent Role="Permetion_Export">
+              <PropertyRef Name="I_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IWH">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="item_WareHouse" Type="Self.item_WareHouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="item_WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTB">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="Move_To" Type="Self.Move_To" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Move_To">
+              <PropertyRef Name="FromWH_Nm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTC">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+          <End Role="Move_To" Type="Self.Move_To" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Move_To">
+              <PropertyRef Name="ToWH_Nm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHPE">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Permetion_Export" Type="Self.Permetion_Export" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Permetion_Export">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SP">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Supp_Email" />
+            </Principal>
+            <Dependent Role="Permetion_Import">
+              <PropertyRef Name="Supp_Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WHP">
+          <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
+          <End Role="Permetion_Import" Type="Self.Permetion_Import" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WareHouse">
+              <PropertyRef Name="WH_Name" />
+            </Principal>
+            <Dependent Role="Permetion_Import">
+              <PropertyRef Name="WH_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyMarketEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Export_Quantity" EntityType="Self.Export_Quantity" />
+          <EntitySet Name="Import_Quantity" EntityType="Self.Import_Quantity" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Item_Measure" EntityType="Self.Item_Measure" />
+          <EntitySet Name="item_WareHouse" EntityType="Self.item_WareHouse" />
+          <EntitySet Name="Move_To" EntityType="Self.Move_To" />
+          <EntitySet Name="Permetion_Export" EntityType="Self.Permetion_Export" />
+          <EntitySet Name="Permetion_Import" EntityType="Self.Permetion_Import" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="WareHouses" EntityType="Self.WareHouse" />
+          <AssociationSet Name="FK_CEQE" Association="Self.FK_CEQE">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPE" Association="Self.FK_SPE">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPEQ" Association="Self.FK_SPEQ">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPEQQ" Association="Self.FK_SPEQQ">
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHEQE" Association="Self.FK_WHEQE">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="Export_Quantity" EntitySet="Export_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIQ" Association="Self.FK_SIQ">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPIQ" Association="Self.FK_SPIQ">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPIQQ" Association="Self.FK_SPIQQ">
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHIQ" Association="Self.FK_WHIQ">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="Import_Quantity" EntitySet="Import_Quantity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_II" Association="Self.FK_II">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="item_WareHouse" EntitySet="item_WareHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IM" Association="Self.FK_IM">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Item_Measure" EntitySet="Item_Measure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IPII" Association="Self.FK_IPII">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTA" Association="Self.FK_MTA">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Move_To" EntitySet="Move_To" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPEE" Association="Self.FK_SPEE">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IWH" Association="Self.FK_IWH">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="item_WareHouse" EntitySet="item_WareHouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTB" Association="Self.FK_MTB">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="Move_To" EntitySet="Move_To" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTC" Association="Self.FK_MTC">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="Move_To" EntitySet="Move_To" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHPE" Association="Self.FK_WHPE">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="Permetion_Export" EntitySet="Permetion_Export" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SP" Association="Self.FK_SP">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WHP" Association="Self.FK_WHP">
+            <End Role="WareHouse" EntitySet="WareHouses" />
+            <End Role="Permetion_Import" EntitySet="Permetion_Import" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CompanyMarketModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CompanyMarketModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="AboutToExpire" ReturnType="Collection(CompanyMarketModel.AboutToExpire_Result)">
+          <Parameter Name="period" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Movement" ReturnType="Collection(CompanyMarketModel.Movement_Result)">
+            <Parameter Name="A1" Mode="In" Type="DateTime" />
+            <Parameter Name="A2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ProductInfo" ReturnType="Collection(String)">
+          <Parameter Name="I_NM" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="productsAfterDate" ReturnType="Collection(Int32)">
+          <Parameter Name="period" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="WHInfo" ReturnType="Collection(String)">
+          <Parameter Name="I_code" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWHInfo" ReturnType="Collection(CompanyMarketModel.GetWHInfo_Result)">
+          <Parameter Name="WH_NM" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProductInfor" ReturnType="Collection(CompanyMarketModel.ProductInfor_Result)">
+          <Parameter Name="I_NM" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AboutToExpire2" ReturnType="Collection(CompanyMarketModel.AboutToExpire2_Result)">
+            <Parameter Name="period" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AboutToExpiree" ReturnType="Collection(CompanyMarketModel.AboutToExpiree_Result)">
+            <Parameter Name="period" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="R4" ReturnType="Collection(CompanyMarketModel.R4_Result)">
+            <Parameter Name="time_interval_months" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="R5" ReturnType="Collection(CompanyMarketModel.R5_Result)">
+            <Parameter Name="time_interval_in_Months" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="zzz" ReturnType="Collection(CompanyMarketModel.zzz_Result)">
+            <Parameter Name="period" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="AboutToExpire_Result">
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="Int32" Name="In_Quantity" Nullable="false" />
+          <Property Type="Int32" Name="ExpireAfter" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Movement_Result">
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="String" Name="FromWH_Nm" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ToWH_Nm" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="DateTime" Name="Move_Date" Nullable="false" />
+          <Property Type="DateTime" Name="Production_Date" Nullable="false" />
+          <Property Type="DateTime" Name="Expire_Date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetWHInfo_Result">
+          <Property Type="String" Name="WH_Name" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="I_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ProductInfor_Result">
+          <Property Type="String" Name="WH_Name" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="WH_Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WH_Maneger" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="AboutToExpire2_Result">
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="Int32" Name="In_Quantity" Nullable="false" />
+          <Property Type="Int32" Name="ExpireAfter" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AboutToExpiree_Result">
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="Int32" Name="In_Quantity" Nullable="false" />
+          <Property Type="Int32" Name="ExpireAfter" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R4_Result">
+          <Property Type="DateTime" Name="Expi_Date" Nullable="true" />
+          <Property Type="String" Name="I_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="Int32" Name="In_Quantity" Nullable="false" />
+          <Property Type="Int32" Name="periodToExpire" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="R5_Result">
+          <Property Type="String" Name="item_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="DateTime" Name="Enter_the_WH_at" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="zzz_Result">
+          <Property Type="DateTime" Name="Expi_Date" Nullable="true" />
+          <Property Type="Int32" Name="I_Code" Nullable="false" />
+          <Property Type="Int32" Name="In_Quantity" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CompanyMarketModelStoreContainer" CdmEntityContainer="CompanyMarketEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Cus_Email" ColumnName="Cus_Email" />
+                <ScalarProperty Name="Cus_Name" ColumnName="Cus_Name" />
+                <ScalarProperty Name="Cus_Mobile" ColumnName="Cus_Mobile" />
+                <ScalarProperty Name="Cus_Phone" ColumnName="Cus_Phone" />
+                <ScalarProperty Name="Cus_Site" ColumnName="Cus_Site" />
+                <ScalarProperty Name="Cus_Fax" ColumnName="Cus_Fax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Export_Quantity">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Export_Quantity">
+              <MappingFragment StoreEntitySet="Export_Quantity">
+                <ScalarProperty Name="Per_Num_E" ColumnName="Per_Num_E" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Cus_Email" ColumnName="Cus_Email" />
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="Out_Quantity" ColumnName="Out_Quantity" />
+                <ScalarProperty Name="Prod_Date" ColumnName="Prod_Date" />
+                <ScalarProperty Name="Expi_Date" ColumnName="Expi_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Import_Quantity">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Import_Quantity">
+              <MappingFragment StoreEntitySet="Import_Quantity">
+                <ScalarProperty Name="Per_Num_I" ColumnName="Per_Num_I" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Supp_Email" ColumnName="Supp_Email" />
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="Prod_Date" ColumnName="Prod_Date" />
+                <ScalarProperty Name="Expi_Date" ColumnName="Expi_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="I_Name" ColumnName="I_Name" />
+                <ScalarProperty Name="Prod_Date" ColumnName="Prod_Date" />
+                <ScalarProperty Name="Expi_Date" ColumnName="Expi_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Measure">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Item_Measure">
+              <MappingFragment StoreEntitySet="Item_Measure">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Measure" ColumnName="Measure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_WareHouse">
+            <EntityTypeMapping TypeName="CompanyMarketModel.item_WareHouse">
+              <MappingFragment StoreEntitySet="item_WareHouse">
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Move_To">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Move_To">
+              <MappingFragment StoreEntitySet="Move_To">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="FromWH_Nm" ColumnName="FromWH_Nm" />
+                <ScalarProperty Name="ToWH_Nm" ColumnName="ToWH_Nm" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Move_Date" ColumnName="Move_Date" />
+                <ScalarProperty Name="Production_Date" ColumnName="Production_Date" />
+                <ScalarProperty Name="Expire_Date" ColumnName="Expire_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permetion_Export">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Permetion_Export">
+              <MappingFragment StoreEntitySet="Permetion_Export">
+                <ScalarProperty Name="Per_Num_E" ColumnName="Per_Num_E" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="Cus_Email" ColumnName="Cus_Email" />
+                <ScalarProperty Name="Per_DateE" ColumnName="Per_DateE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permetion_Import">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Permetion_Import">
+              <MappingFragment StoreEntitySet="Permetion_Import">
+                <ScalarProperty Name="Per_Num_I" ColumnName="Per_Num_I" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Supp_Email" ColumnName="Supp_Email" />
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="Per_Date_I" ColumnName="Per_Date_I" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="CompanyMarketModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Supp_Name" ColumnName="Supp_Name" />
+                <ScalarProperty Name="Supp_Email" ColumnName="Supp_Email" />
+                <ScalarProperty Name="Supp_phone" ColumnName="Supp_phone" />
+                <ScalarProperty Name="Supp_Mobile" ColumnName="Supp_Mobile" />
+                <ScalarProperty Name="Supp_Fax" ColumnName="Supp_Fax" />
+                <ScalarProperty Name="Supp_Site" ColumnName="Supp_Site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CompanyMarketModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WareHouses">
+            <EntityTypeMapping TypeName="CompanyMarketModel.WareHouse">
+              <MappingFragment StoreEntitySet="WareHouse">
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="WH_Address" ColumnName="WH_Address" />
+                <ScalarProperty Name="WH_Maneger" ColumnName="WH_Maneger" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CompanyMarketModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CompanyMarketModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CompanyMarketModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CompanyMarketModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CompanyMarketModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CompanyMarketModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CompanyMarketModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="AboutToExpire" FunctionName="CompanyMarketModel.Store.AboutToExpire">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.AboutToExpire_Result">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="ExpireAfter" ColumnName="ExpireAfter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Movement" FunctionName="CompanyMarketModel.Store.Movement">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.Movement_Result">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="FromWH_Nm" ColumnName="FromWH_Nm" />
+                <ScalarProperty Name="ToWH_Nm" ColumnName="ToWH_Nm" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Move_Date" ColumnName="Move_Date" />
+                <ScalarProperty Name="Production_Date" ColumnName="Production_Date" />
+                <ScalarProperty Name="Expire_Date" ColumnName="Expire_Date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductInfo" FunctionName="CompanyMarketModel.Store.ProductInfo" />
+          <FunctionImportMapping FunctionImportName="productsAfterDate" FunctionName="CompanyMarketModel.Store.productsAfterDate" />
+          <FunctionImportMapping FunctionImportName="WHInfo" FunctionName="CompanyMarketModel.Store.WHInfo" />
+          <FunctionImportMapping FunctionImportName="GetWHInfo" FunctionName="CompanyMarketModel.Store.GetWHInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.GetWHInfo_Result">
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="I_Name" ColumnName="I_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductInfor" FunctionName="CompanyMarketModel.Store.ProductInfor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.ProductInfor_Result">
+                <ScalarProperty Name="WH_Name" ColumnName="WH_Name" />
+                <ScalarProperty Name="WH_Address" ColumnName="WH_Address" />
+                <ScalarProperty Name="WH_Maneger" ColumnName="WH_Maneger" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AboutToExpire2" FunctionName="CompanyMarketModel.Store.AboutToExpire2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.AboutToExpire2_Result">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="ExpireAfter" ColumnName="ExpireAfter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AboutToExpiree" FunctionName="CompanyMarketModel.Store.AboutToExpiree">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.AboutToExpiree_Result">
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="ExpireAfter" ColumnName="ExpireAfter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R4" FunctionName="CompanyMarketModel.Store.R4">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.R4_Result">
+                <ScalarProperty Name="Expi_Date" ColumnName="Expi_Date" />
+                <ScalarProperty Name="I_Name" ColumnName="I_Name" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+                <ScalarProperty Name="periodToExpire" ColumnName="periodToExpire" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="R5" FunctionName="CompanyMarketModel.Store.R5">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.R5_Result">
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="Enter_the_WH_at" ColumnName="Enter the WH at" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="zzz" FunctionName="CompanyMarketModel.Store.zzz">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CompanyMarketModel.zzz_Result">
+                <ScalarProperty Name="Expi_Date" ColumnName="Expi_Date" />
+                <ScalarProperty Name="I_Code" ColumnName="I_Code" />
+                <ScalarProperty Name="In_Quantity" ColumnName="In_Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
